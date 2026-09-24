@@ -57,7 +57,7 @@ The included `.streamlit/config.toml` turns off Streamlit usage telemetry for th
 
 ## Run
 
-Double-click `launch_barometer.bat` in `C:\AI\Codex\Barometer` to start the dashboard. Keep its command window open while using the app; closing it stops the local server.
+Double-click `launch_barometer.bat` in `C:\Barometer` to start the dashboard. Keep its command window open while using the app; closing it stops the local server.
 
 Fetch live data once, then start the dashboard:
 
