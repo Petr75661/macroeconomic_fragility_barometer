@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Macroeconomic Fragility Barometer — Getting Started</title>
+  <style>
+    :root { --ink:#172033; --muted:#64748b; --paper:#f7f9fc; --line:#dbe3ef; --blue:#2563eb; --green:#16a34a; --yellow:#ca8a04; --orange:#ea580c; --red:#dc2626; --code:#0f172a; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    .hero { color:white; background:linear-gradient(125deg,#102a43,#1e40af 58%,#0f766e); padding:68px 24px 58px; }
+    .wrap { width:min(1060px,100% - 40px); margin:auto; }
+    .eyebrow { margin:0 0 12px; color:#bfdbfe; font-size:.82rem; font-weight:750; letter-spacing:.12em; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(2.2rem,6vw,4.5rem); line-height:1.03; letter-spacing:-.055em; }
+    .lead { max-width:700px; margin:20px 0 0; color:#dbeafe; font-size:1.14rem; }
+    .badges { display:flex; flex-wrap:wrap; gap:9px; margin-top:27px; }
+    .badge { padding:5px 11px; border:1px solid #93c5fd88; border-radius:999px; background:#ffffff12; font-size:.86rem; }
+    main { display:grid; grid-template-columns:220px minmax(0,1fr); gap:42px; padding:44px 0 72px; }
+    nav { position:sticky; top:20px; height:max-content; border-left:2px solid var(--line); padding-left:16px; }
+    nav a { display:block; padding:5px 0; color:var(--muted); font-size:.91rem; text-decoration:none; }
+    nav a:hover { color:var(--blue); }
+    section { scroll-margin-top:24px; margin-bottom:46px; }
+    h2 { margin:0 0 13px; font-size:1.65rem; line-height:1.25; letter-spacing:-.025em; }
+    h3 { margin:26px 0 8px; font-size:1.12rem; }
+    p { margin:0 0 14px; }
+    .callout { margin:18px 0; padding:15px 18px; border-left:4px solid var(--blue); border-radius:0 10px 10px 0; background:#eff6ff; }
+    .callout.warn { border-color:var(--orange); background:#fff7ed; }
+    .callout strong { display:block; margin-bottom:3px; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; margin:18px 0; }
+    .card { padding:19px; border:1px solid var(--line); border-radius:13px; background:white; box-shadow:0 3px 15px #0f172a08; }
+    .card h3 { margin:0 0 6px; }
+    .card p { margin:0; color:var(--muted); font-size:.94rem; }
+    .dot { display:inline-block; width:10px; height:10px; margin-right:7px; border-radius:50%; }
+    .green { background:var(--green); } .yellow { background:var(--yellow); } .orange { background:var(--orange); } .red { background:var(--red); }
+    ol, ul { margin:8px 0 17px; padding-left:23px; }
+    li { margin:6px 0; }
+    pre { overflow:auto; margin:14px 0 18px; padding:17px 19px; border-radius:11px; background:var(--code); color:#e2e8f0; font:14px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    code { padding:.08em .32em; border-radius:4px; background:#e9eef6; color:#1e3a8a; font:90% ui-monospace,SFMono-Regular,Consolas,monospace; }
+    pre code { padding:0; background:transparent; color:inherit; }
+    a { color:var(--blue); }
+    table { width:100%; border-collapse:collapse; margin:16px 0; background:white; font-size:.93rem; }
+    th,td { padding:11px 12px; border:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { background:#f1f5f9; }
+    footer { padding:27px 0; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem; }
+    @media (max-width:760px) { main { display:block; padding-top:30px; } nav { position:static; display:flex; gap:14px; overflow:auto; margin-bottom:32px; border-left:0; border-bottom:1px solid var(--line); padding:0 0 10px; white-space:nowrap; } nav a { padding:0; } .grid { grid-template-columns:1fr; } }
+    @media print { body { background:white; } .hero { padding:30px 0; background:#fff; color:var(--ink); } .hero .lead,.eyebrow { color:#334155; } nav { display:none; } main { display:block; padding:28px 0; } pre { white-space:pre-wrap; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Local macro-financial early warning dashboard</p>
+      <h1>Macroeconomic Fragility Barometer</h1>
+      <p class="lead">A friendly guide to launching, configuring, refreshing, and understanding the Macro Fragility dashboard.</p>
+      <div class="badges"><span class="badge">Python 3.11+</span><span class="badge">Local SQLite cache</span><span class="badge">Streamlit + Plotly</span><span class="badge">Optional local Ollama</span></div>
+    </div>
+  </header>
+
+  <div class="wrap"><main>
+    <nav aria-label="Contents">
+      <a href="#start">Quick start</a>
+      <a href="#keys">API keys and .env</a>
+      <a href="#refresh">Refresh and scheduling</a>
+      <a href="#dashboard">Read the dashboard</a>
+      <a href="#files">Key files</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+    </nav>
+
+    <article>
+      <section id="start">
+        <h2>Quick start</h2>
+        <p>The fastest way to open the dashboard is to double-click <code>launch_barometer.bat</code> in the parent Barometer folder. Keep its Command Prompt window open while using the site; closing it stops the local server.</p>
+        <div class="callout"><strong>First run</strong>Streamlit may offer an optional email field. Leave it blank and press Enter. This is Streamlit onboarding, not a Project Barometer requirement.</div>
+        <h3>Run from Command Prompt</h3>
+        <pre><code>cd C:\Barometer\macro_barometer
+python -m streamlit run app.py</code></pre>
+        <h3>Explore safely with built-in demo data</h3>
+        <pre><code>cd C:\Barometer\macro_barometer
+python main.py --seed-demo
+python -m streamlit run app.py</code></pre>
+        <p>Demo data is useful for learning the interface offline.</p>
+        <div class="callout warn"><strong>Crucial step before going live</strong><br>
+        If you run the demo script, you must delete <code>data/macro_data.db</code> before running a real live API refresh. Mixing fake demo data with live data will corrupt the normalization math, causing massive chart spikes, sawtooth patterns, and false "Red regime" alerts.</div>
+      </section>
+
+      <section id="keys">
+        <h2>API keys and your <code>.env</code> file</h2>
+        <p>The dashboard works without keys, but FRED and EIA data will be unavailable until you add them. The file <code>.env.example</code> is only a template; create your personal <code>.env</code> copy and keep it private.</p>
+        <pre><code>cd C:\Barometer\macro_barometer
+copy .env.example .env
+notepad .env</code></pre>
+        <p>In Notepad, put each key after its equals sign. Do not use quotation marks or paste the key into the <code>.env.example</code> template.</p>
+        <pre><code>FRED_API_KEY=paste_your_fred_key_here
+EIA_API_KEY=paste_your_eia_key_here
+OLLAMA_HOST=http://localhost:11434</code></pre>
+        <div class="callout warn"><strong>Keep keys secret</strong><code>.env</code> is excluded from Git, but do not paste its contents into chat, screenshots, or public issue trackers. Restart the dashboard or run a new refresh after saving changes.</div>
+        <div class="grid">
+          <div class="card"><h3>FRED</h3><p>Provides Treasury yields, high-yield spreads, and financial-stress data.</p><ol><li>Create or sign in to a free <a href="https://fredaccount.stlouisfed.org/">FRED account</a>.</li><li>Open the signed-in <a href="https://fred.stlouisfed.org/docs/api/fred/v2/api_key.html">FRED API key page</a> and request a key.</li><li>Paste it after <code>FRED_API_KEY=</code>.</li></ol></div>
+          <div class="card"><h3>EIA</h3><p>Provides weekly distillate and Strategic Petroleum Reserve inventory data.</p><ol><li>Complete the free <a href="https://www.eia.gov/opendata/register.php">EIA Open Data registration form</a>.</li><li>Look for the key in the registration email; check spam if needed.</li><li>Paste it after <code>EIA_API_KEY=</code>.</li></ol></div>
+        </div>
+        <p><strong>Optional is okay:</strong> Yahoo Finance market data needs no key. If FRED or EIA is blank, the app uses cached data where available and displays a fallback warning instead of failing.</p>
+      </section>
+
+      <section id="refresh">
+        <h2>Refresh and scheduling</h2>
+        <h3>Refresh once now</h3>
+        <p>In the dashboard, choose <strong>Refresh Data Now</strong>. Alternatively, double-click <code>refresh_barometer.bat</code> in the parent Barometer folder.</p>
+        <pre><code>cd C:\Barometer\macro_barometer
+python main.py --refresh</code></pre>
+        <div class="callout warn"><strong>Ollama can be slow</strong>Geopolitical scoring uses your local Qwen model. The app permits up to five minutes per request and one retry. A slow or unavailable model falls back to a neutral score rather than crashing the dashboard.</div>
+        <h3>Windows Task Scheduler: recommended daily collection</h3>
+        <ol><li>Open <strong>Task Scheduler</strong> and choose <strong>Create Basic Task</strong>.</li><li>Name it <em>Project Barometer daily refresh</em> and select <strong>Daily</strong>.</li><li>For <strong>Start a program</strong>, choose <code>C:\Barometer\refresh_barometer.bat</code>.</li><li>Finish the wizard. The task fetches data, updates today’s cache, records the day’s composite score, and exits.</li></ol>
+        <p>The Macro Fragility Trend stores one point per calendar day. More than one refresh in a day updates that same day’s point rather than creating duplicates.</p>
+        <h3>Keep the dashboard open</h3>
+        <p>Use the <strong>Dashboard refresh interval</strong> selector (default: one day) to reread the local cache automatically. Enable <strong>Also refresh live sources</strong> only when you want the open dashboard to run data collection and Ollama itself. Leaving it off is recommended when Task Scheduler performs the daily refresh.</p>
+      </section>
+
+      <section id="dashboard">
+        <h2>How to read the dashboard</h2>
+        <p>The Composite Macro Fragility Index runs from 0 to 100. Higher values always represent more stress. It is an analytical early-warning aid—not investment advice.</p>
+        <table><thead><tr><th>Zone</th><th>Score</th><th>Plain-English reading</th></tr></thead><tbody>
+          <tr><td><span class="dot green"></span>Green</td><td>0–35</td><td>Normal regime; buffers are relatively abundant.</td></tr>
+          <tr><td><span class="dot yellow"></span>Yellow</td><td>36–60</td><td>Structural strain; monitor the indicators and buffer burn rate.</td></tr>
+          <tr><td><span class="dot orange"></span>Orange</td><td>61–80</td><td>Acute fragility; multiple conditions are deteriorating together.</td></tr>
+          <tr><td><span class="dot red"></span>Red</td><td>81–100</td><td>Systemic stress; physical, credit, or broad-market disruption may be underway.</td></tr>
+        </tbody></table>
+        <div class="grid">
+          <div class="card"><h3>Energy &amp; Physical Flow</h3><p>Watch crude price momentum, refinery margins, and SPR inventory. A falling SPR is a smaller emergency buffer.</p></div>
+          <div class="card"><h3>Credit &amp; Bonds</h3><p>Wider high-yield spreads and higher real yields mean credit is becoming more restrictive. The 450 bps line is a high-yield watch level.</p></div>
+          <div class="card"><h3>AI &amp; Equity Breadth</h3><p>Rising SPY/RSP can mean leadership is narrowing. VIX, the dollar, and semiconductor/staples leadership should be read by direction, not compared by height.</p></div>
+          <div class="card"><h3>Geopolitical Intelligence</h3><p>Local Ollama analyzes RSS headline batches using a strict scoring rubric and chain-of-thought reasoning to prevent hallucination. It scores active physical disruptions, ignoring opinion pieces or hypotheticals.</p></div>
+        </div>
+      </section>
+
+      <section id="files">
+        <h2>Key files</h2>
+        <table><thead><tr><th>File</th><th>Purpose</th></tr></thead><tbody>
+          <tr><td><code>app.py</code></td><td>Streamlit dashboard.</td></tr>
+          <tr><td><code>main.py</code></td><td>Refresh CLI, optional watch loop, and demo data generator.</td></tr>
+          <tr><td><code>config.yaml</code></td><td>Weights, tickers, feeds, and Ollama timeout/model settings.</td></tr>
+          <tr><td><code>.env</code></td><td>Your private API keys; create from <code>.env.example</code>.</td></tr>
+          <tr><td><code>data/macro_data.db</code></td><td>Local SQLite cache and daily fragility-score history. (Delete this to clear bad data).</td></tr>
+          <tr><td><code>launch_barometer.bat</code></td><td>Double-click launcher for the web dashboard.</td></tr>
+          <tr><td><code>refresh_barometer.bat</code></td><td>One-shot collector suitable for Task Scheduler.</td></tr>
+        </tbody></table>
+      </section>
+
+      <section id="troubleshooting">
+        <h2>Troubleshooting</h2>
+        <h3>Wildly inaccurate charts or persistent false alarms</h3>
+        <p>If your charts show bizarre sawtooth patterns, massive spikes, or metrics that jump between vastly different baseline scales, your database is contaminated with mixed demo data and live API data. Close the dashboard, delete <code>data/macro_data.db</code>, and run <code>python main.py --refresh</code> to pull a clean history.</p>
+        
+        <h3>“streamlit is not recognized”</h3>
+        <p>Use <code>python -m streamlit run app.py</code>. This does not require Streamlit’s launcher directory to be on Windows PATH.</p>
+        
+        <h3>Missing FRED or EIA data</h3>
+        <p>Confirm the key is in <code>.env</code>, not <code>.env.example</code>; save it; then restart or refresh. Missing keys are non-fatal.</p>
+        
+        <h3>The geopolitics score is neutral or a model warning appears</h3>
+        <p>Check that Ollama is running and that your configured model is installed (e.g. <code>batiai/qwen3.6-35b:iq4</code>). The dashboard deliberately uses a neutral fallback after a timeout or invalid response.</p>
+        
+        <h3>No history line yet</h3>
+        <p>The trend appears after two different calendar days have been collected. Schedule <code>refresh_barometer.bat</code> daily to build it.</p>
+      </section>
+    </article>
+  </main></div>
+  <footer><div class="wrap">Project Barometer · Local dashboard documentation · For information and monitoring only, not investment advice.</div></footer>
+</body>
+</html>
