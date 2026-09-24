@@ -1,0 +1,35 @@
+database_path: data/macro_data.db
+lookback_days: 400
+ollama:
+  host: http://localhost:11434
+  model: batiai/qwen3.6-35b:iq4
+  # The local 35B model can be slow on first load or under CPU inference.
+  timeout_seconds: 300
+weights:
+  energy: 0.30
+  credit: 0.25
+  market: 0.20
+  geopolitics: 0.25
+tickers:
+  brent: BZ=F
+  wti: CL=F
+  heating_oil: HO=F
+  spy: SPY
+  rsp: RSP
+  soxx: SOXX
+  xlp: XLP
+  vix: ^VIX
+  dollar: DX-Y.NYB
+  bizd: BIZD
+fred_series:
+  high_yield_spread: BAMLH0A0HYM2
+  treasury_10y: DGS10
+  yield_curve: T10Y2Y
+  real_yield_10y: DFII10
+  financial_stress: STLFSI4
+eia:
+  distillate_series: PET.WDISTUS1.W
+  spr_series: PET.WCSSTUS1.W
+rss_feeds:
+  - https://news.google.com/rss/search?q=energy+oil+shipping+refinery&hl=en-US&gl=US&ceid=US:en
+  - https://news.google.com/rss/search?q=Hormuz+geopolitics&hl=en-US&gl=US&ceid=US:en
