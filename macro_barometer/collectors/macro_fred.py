@@ -37,6 +37,11 @@ def collect_fred_data(cache: Cache, series_map: Mapping[str, str], api_key: str 
             if values.empty:
                 report.warnings.append(f"FRED series '{series_id}' ({metric}) returned no observations.")
                 continue
+            
+            # Convert percentage to basis points for the dashboard chart
+            if metric == "high_yield_spread":
+                values = values * 100
+                
             report.stored += cache.upsert_observations(metric, values.rename("value").to_frame(), f"fred:{series_id}")
         except Exception as exc:
             report.warnings.append(f"FRED series '{series_id}' ({metric}) failed: {exc}")
